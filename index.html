@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Winrate Provider - KasinoJP</title>
+<style>
+:root{
+  --bg: #0a0f1c;
+  --panel: rgba(255,255,255,0.07);
+  --accent1: #7f5cff; 
+  --accent2: #00d4ff;
+  --text: #f9f9fb;
+  --muted: #9aa0b8;
+  --highlight: #ffd859;
+  --glass: rgba(255,255,255,0.08);
+}
+body{
+  margin:0;
+  font-family:"Poppins",system-ui,sans-serif;
+  background: url('auto.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height:100vh;
+  display: flex;
+  justify-content: center;
+  color:var(--text);
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+.card{
+  width:min(420px,92vw);
+  padding:24px;
+  border-radius:20px;
+  background:var(--panel);
+  backdrop-filter: blur(16px);
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 30px rgba(0,212,255,0.15);
+  text-align:center;
+  margin-top: 20px;
+}
+.title{
+  font-size:22px;
+  font-weight:900;
+  text-transform:uppercase;
+  background: linear-gradient(90deg,var(--accent2),var(--highlight));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+.subtitle{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+/* Input User */
+#userIdInput {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--accent2);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.center-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+}
+
+.percent-wrap{
+  width:100%;
+  background:var(--glass);
+  border-radius:16px;
+  padding:20px;
+  text-align:center;
+}
+.big-percent{
+  font-size:38px;
+  font-weight:900;
+  background: linear-gradient(90deg,var(--accent2),var(--highlight));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.user-result{
+  font-size:14px;
+  color:var(--highlight);
+  margin-bottom:6px;
+}
+
+.provider-list{
+  display:flex;
+  flex-wrap: wrap;
+  gap:8px;
+  justify-content:center;
+  margin-top:10px;
+}
+.provider{
+  padding:8px 16px;
+  border-radius:10px;
+  font-size:14px;
+  background:var(--glass);
+  cursor:pointer;
+  transition:.2s;
+}
+.provider:hover{
+  background:var(--accent2);
+  color:#000;
+  font-weight:600;
+}
+.provider.active {
+  background:var(--accent2);
+  color:#000;
+  font-weight:600;
+}
+
+.photo-container{
+  margin-top:20px;
+}
+.photo-container img{
+  max-width:100%;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  transition:opacity 0.6s ease;
+}
+
+.btn{
+  margin-top:20px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border:none;
+  padding:12px 22px;
+  border-radius:12px;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  width: 100%;
+}
+
+.login-btn{
+  margin-top:18px;
+  display:inline-block;
+  text-decoration:none;
+  padding:10px 20px;
+  border-radius:12px;
+  background: linear-gradient(90deg, var(--highlight), var(--accent2));
+  color:#000;
+  font-weight:700;
+  width: 100%;
+  text-align: center;
+}
+
+@media(max-width:480px){
+  body {
+    padding: 10px 0;
+  }
+  .card{
+    padding:20px;
+    width: 95%;
+  }
+  .title{
+    font-size:20px;
+  }
+  .big-percent{
+    font-size:32px;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">SERVER GLORYGAME99 AUTO WIN</div>
+    <div class="subtitle">Masukkan User ID, pilih provider, lalu cek <b>WINRATE</b>!</div>
+
+    <!-- Input User ID -->
+    <input type="text" id="userIdInput" placeholder="Masukkan User ID kamu">
+
+    <div class="center-area">
+      <div class="percent-wrap">
+        <div class="user-result" id="userResult"></div>
+        <div class="big-percent" id="percent">0%</div>
+        <div class="percent-label">Persentase peningkatan</div>
+      </div>
+
+      <!-- Provider List -->
+      <div class="provider-list">
+        <div class="provider" data-provider="Pragmatic" 
+          data-photos='[
+            "https://raw.githubusercontent.com/KASINOJP/CEKPUTARAN/main/pragmatic1.jpg",
+            "https://raw.githubusercontent.com/KASINOJP/CEKPUTARAN/main/pragmatic2.jpg",
+          ]'>Pragmatic</div>
+
+        <div class="provider" data-provider="PG Soft" 
+          data-photos='[
+            "https://raw.githubusercontent.com/KASINOJP/CEKPUTARAN/main/pgsoft1.jpg",
+            "https://raw.githubusercontent.com/KASINOJP/CEKPUTARAN/main/pgsoft2.jpg",
+          ]'>PG Soft</div>
+      </div>
+
+      <!-- Tombol Cek -->
+      <button id="activateBtn" class="btn">CEK WINRATE PROVIDER</button>
+
+      <!-- Tempat Foto -->
+      <div class="photo-container" id="photoContainer"></div>
+
+      <!-- Tombol Login -->
+      <a href="https://heylink.me/kasinojp-ku/" class="login-btn">LOGIN SEKARANG</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const percentEl = document.getElementById("percent");
+  const activateBtn = document.getElementById("activateBtn");
+  const photoContainer = document.getElementById("photoContainer");
+  const userResult = document.getElementById("userResult");
+  const userIdInput = document.getElementById("userIdInput");
+
+  let selectedProvider = null;
+  let selectedPhotos = [];
+  let photoShown = false;
+
+  // pilih provider
+  document.querySelectorAll(".provider").forEach(p=>{
+    p.addEventListener("click", ()=>{
+      document.querySelectorAll(".provider").forEach(x=>x.classList.remove("active"));
+      p.classList.add("active");
+      selectedProvider = p.dataset.provider;
+      selectedPhotos = JSON.parse(p.dataset.photos);
+      photoShown = false;
+    });
+  });
+
+  // cek winrate
+  activateBtn.onclick=()=>{
+    const userId = userIdInput.value.trim();
+    if(!userId){
+      alert("Masukkan User ID terlebih dahulu!");
+      return;
+    }
+    if(!selectedProvider){
+      alert("Pilih provider dulu!");
+      return;
+    }
+
+    let target = Math.floor(Math.random()*6)+93; // 93-98%
+    let count=0;
+    userResult.textContent = "Hasil untuk user: " + userId;
+
+    let timer = setInterval(()=>{
+      count++;
+      percentEl.textContent = count+"%";
+      if(count>=target){
+        clearInterval(timer);
+        percentEl.textContent = target+"% ("+selectedProvider+")";
+
+        // tampilkan foto sekali saja
+        if (!photoShown && selectedPhotos.length > 0) {
+          photoContainer.innerHTML = `<img src="${selectedPhotos[0]}" alt="Foto ${selectedProvider}">`;
+          photoShown = true;
+        } else if(selectedPhotos.length === 0){
+          photoContainer.innerHTML = `<p style="color:var(--muted)">Foto tidak tersedia</p>`;
+        }
+      }
+    },40);
+  };
+})();
+</script>
+</body>
+</html>
